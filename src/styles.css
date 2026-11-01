@@ -404,6 +404,16 @@ body::before {
   .asset-error p { font-size: 10px; }
   .context-error { right: 12px; font-size: 8px; }
 }
+/* Short viewports: compact the inspect sheet and lift the toast off the model. */
+@media (max-height: 860px) and (min-width: 760px) {
+  .inspect-hint { padding: 5px 0 8px; }
+  .inspect-hint .orbit-symbol { display: none; }
+  .fieldstrip-control { padding: 8px 0; }
+  .operation-status { margin: 6px 0 2px; }
+  .mechanical-controls .text-action { min-height: 30px; }
+  .illustrative-note { display: none; }
+  body:has(.inspect-ui) .toast { top: 148px; bottom: auto; right: 30px; }
+}
 @media (max-width: 370px) {
   .hero-cta { padding: 0 11px; gap: 13px; font-size: 9px; }
   .hero-statement { font-size: 23px; }
