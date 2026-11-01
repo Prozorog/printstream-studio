@@ -1,5 +1,5 @@
 import { Box3, Euler, Matrix4, Quaternion, Vector3 } from 'three'
-import { explode as blenderExplode } from '../../artifacts/geometry-stats.json'
+import { explode as blenderExplode } from '../geometry-stats.json'
 
 export const PART_NAMES = [
   'Suppressor', 'Suppressor_Collar', 'Barrel', 'FrontSight', 'BayonetLug', 'GasBlock',
