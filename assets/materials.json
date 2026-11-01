@@ -1,0 +1,473 @@
+{
+  "schemaVersion": 1,
+  "description": "Authoritative Blender and glTF surface definitions for the unofficial Printstream visual study. Material dictionary keys are exact Blender/glTF material names.",
+  "referenceImage": "C:/Main/WorkPlace/Muse spark/cs model/m4a1s-printstream prompt/m4a1s_printstream_4k_enhanced.png",
+  "authorship": "New deterministic vector-style decal artwork inspired by the supplied reference; no screenshot lighting is baked into base color.",
+  "textureConvention": {
+    "colorSpace": "Base-color PNGs are sRGB; roughness, normal, film and AO are linear data.",
+    "baseColorFactor": "Linear RGBA. Textured materials use white, so the authored E4E5E3 pigment is not multiplied twice.",
+    "roughnessTexture": "Absolute roughness, not a scalar multiplier. Connect directly in Blender. Finalizer packs roughness in G and 1 in B, uses roughnessFactor=1, and keeps the exact metallicFactor from metalness.",
+    "normal": "OpenGL tangent space (+Y). normalScale is a strength multiplier.",
+    "filmTexture": "Green channel interpolates 250..450 nm; preserve as linear data. Holographic base artwork is a genuine pastel rainbow.",
+    "sampler": "UV0, repeat, trilinear minification, linear magnification. AO uses UV1 and clamp-to-edge."
+  },
+  "uv": {
+    "receiver": {
+      "texture": "assets/textures/receiver.png",
+      "u": "(x - 0.05) / 2.4",
+      "leftV": "0.02 + 0.46 * (z + 0.93) / 1.8",
+      "rightV": "0.52 + 0.46 * (z + 0.93) / 1.8",
+      "rightPortKeepout": {
+        "x": [
+          0.65,
+          1.7
+        ],
+        "z": [
+          -0.07,
+          0.19
+        ]
+      }
+    },
+    "suppressor": {
+      "texture": "assets/textures/suppressor.png",
+      "u": "(x + 5.0) / 1.9",
+      "v": "atan2(z-centerZ, y-centerY) / (2*pi) modulo 1",
+      "leftV": 0.5,
+      "topV": 0.25,
+      "note": "Left v=.5 artwork is vertically inverted in the PNG so it reads upright on the cylindrical surface."
+    },
+    "handguard": {
+      "texture": "assets/textures/handguard.png",
+      "u": "(x + 1.6) / 1.66",
+      "v": "atan2(z-centerZ, y-centerY) / (2*pi) modulo 1",
+      "leftV": 0.5,
+      "topV": 0.25
+    },
+    "magazine": {
+      "texture": "assets/textures/magazine.png",
+      "u": "Normalized local longitudinal x across the magazine body",
+      "leftV": "0.02 + 0.46 * normalized local z",
+      "rightV": "0.52 + 0.46 * normalized local z"
+    },
+    "grip": {
+      "texture": "assets/textures/grip.png",
+      "u": "Normalized local longitudinal x",
+      "leftV": "0.02 + 0.46 * normalized local z",
+      "rightV": "0.52 + 0.46 * normalized local z"
+    },
+    "stock": {
+      "texture": "assets/textures/stock.png",
+      "u": "Normalized local longitudinal x",
+      "leftV": "0.02 + 0.46 * normalized local z",
+      "rightV": "0.52 + 0.46 * normalized local z"
+    },
+    "holographic": {
+      "texture": "assets/textures/holo.png",
+      "u": "0..1 along stripe length",
+      "v": "0..1 along stripe height"
+    },
+    "imageOrigin": "PNG top-left. All formulas use Blender bottom-origin v; raster y=(1-v)*height."
+  },
+  "ao": {
+    "texture": "assets/textures/ao.png",
+    "alternateTexture": "public/textures/ao.png",
+    "texCoord": 1,
+    "strength": 0.85,
+    "resolution": 2048,
+    "scope": "Only meshes descended from Rifle using a listed material. Bake isolated mechanical parts into a nonoverlapping shared atlas. Never apply the atlas to the stage floor."
+  },
+  "export": {
+    "input": "artifacts/m4a1s-raw.glb",
+    "output": "public/models/m4a1s-printstream.glb",
+    "stats": "artifacts/asset-stats.json",
+    "modelRoot": "Rifle"
+  },
+  "requiredNodes": [
+    "Rifle",
+    "Suppressor",
+    "Suppressor_Collar",
+    "Barrel",
+    "FrontSight",
+    "BayonetLug",
+    "GasBlock",
+    "Handguard_Top",
+    "Handguard_Bottom",
+    "DeltaRing",
+    "HandguardCap",
+    "UpperReceiver",
+    "CarryHandle",
+    "RearSight",
+    "DustCover",
+    "ForwardAssist",
+    "ChargingHandle",
+    "BoltCarrier",
+    "Bolt",
+    "LowerReceiver",
+    "Trigger",
+    "TriggerGuard",
+    "Hammer",
+    "SelectorLever",
+    "BoltCatch",
+    "MagRelease",
+    "TakedownPin_Front",
+    "TakedownPin_Rear",
+    "Magazine",
+    "MagBody",
+    "MagFollower",
+    "MagSpring",
+    "MagBaseplate",
+    "Cartridge",
+    "Cartridge_02",
+    "Cartridge_03",
+    "Cartridge_04",
+    "Cartridge_05",
+    "PistolGrip",
+    "BufferTube",
+    "BufferSpring",
+    "Buffer",
+    "Stock",
+    "StockLever",
+    "ButtPad"
+  ],
+  "requiredMaterials": [
+    "PearlReceiver",
+    "PearlSuppressor",
+    "PearlHandguard",
+    "PearlMagazine",
+    "GripPolymer",
+    "StockPolymer",
+    "Holographic",
+    "SatinSteel"
+  ],
+  "materials": {
+    "PearlReceiver": {
+      "baseColorSrgb": "#E4E5E3",
+      "baseColorFactor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "metalness": 0.04,
+      "roughness": 0.36,
+      "clearcoat": {
+        "factor": 1,
+        "roughness": 0.08
+      },
+      "iridescence": {
+        "factor": 0.28,
+        "ior": 1.3,
+        "thicknessMinimum": 250,
+        "thicknessMaximum": 450,
+        "thicknessTexture": "assets/textures/pearl_film.png"
+      },
+      "normalScale": 0.24,
+      "ao": true,
+      "baseColorTexture": "assets/textures/receiver.png",
+      "roughnessTexture": "assets/textures/pearl_roughness.png",
+      "normalTexture": "assets/textures/pearl_normal.png"
+    },
+    "PearlSuppressor": {
+      "baseColorSrgb": "#E4E5E3",
+      "baseColorFactor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "metalness": 0.04,
+      "roughness": 0.36,
+      "clearcoat": {
+        "factor": 1,
+        "roughness": 0.14
+      },
+      "iridescence": {
+        "factor": 0.4,
+        "ior": 1.3,
+        "thicknessMinimum": 250,
+        "thicknessMaximum": 450,
+        "thicknessTexture": "assets/textures/pearl_film.png"
+      },
+      "normalScale": 0.24,
+      "ao": true,
+      "baseColorTexture": "assets/textures/suppressor.png",
+      "roughnessTexture": "assets/textures/pearl_roughness.png",
+      "normalTexture": "assets/textures/pearl_normal.png"
+    },
+    "PearlHandguard": {
+      "baseColorSrgb": "#E4E5E3",
+      "baseColorFactor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "metalness": 0.04,
+      "roughness": 0.36,
+      "clearcoat": {
+        "factor": 1,
+        "roughness": 0.14
+      },
+      "iridescence": {
+        "factor": 0.4,
+        "ior": 1.3,
+        "thicknessMinimum": 250,
+        "thicknessMaximum": 450,
+        "thicknessTexture": "assets/textures/pearl_film.png"
+      },
+      "normalScale": 0.24,
+      "ao": true,
+      "baseColorTexture": "assets/textures/handguard.png",
+      "roughnessTexture": "assets/textures/pearl_roughness.png",
+      "normalTexture": "assets/textures/pearl_normal.png"
+    },
+    "PearlMagazine": {
+      "baseColorSrgb": "#E4E5E3",
+      "baseColorFactor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "metalness": 0.04,
+      "roughness": 0.36,
+      "clearcoat": {
+        "factor": 1,
+        "roughness": 0.08
+      },
+      "iridescence": {
+        "factor": 0.28,
+        "ior": 1.3,
+        "thicknessMinimum": 250,
+        "thicknessMaximum": 450,
+        "thicknessTexture": "assets/textures/pearl_film.png"
+      },
+      "normalScale": 0.24,
+      "ao": true,
+      "baseColorTexture": "assets/textures/magazine.png",
+      "roughnessTexture": "assets/textures/pearl_roughness.png",
+      "normalTexture": "assets/textures/pearl_normal.png"
+    },
+    "PearlTrim": {
+      "baseColorSrgb": "#E4E5E3",
+      "baseColorFactor": [
+        0.775822218,
+        0.783537792,
+        0.768151147,
+        1
+      ],
+      "metalness": 0.04,
+      "roughness": 0.36,
+      "clearcoat": {
+        "factor": 1,
+        "roughness": 0.08
+      },
+      "iridescence": {
+        "factor": 0.28,
+        "ior": 1.3,
+        "thicknessMinimum": 250,
+        "thicknessMaximum": 450,
+        "thicknessTexture": "assets/textures/pearl_film.png"
+      },
+      "normalScale": 0.24,
+      "ao": true,
+      "roughnessTexture": "assets/textures/pearl_roughness.png",
+      "normalTexture": "assets/textures/pearl_normal.png"
+    },
+    "SatinSteel": {
+      "baseColorSrgb": "#141516",
+      "baseColorFactor": [
+        0.00699541,
+        0.007499032,
+        0.008023193,
+        1
+      ],
+      "metalness": 0.6,
+      "roughness": 0.4,
+      "clearcoat": {
+        "factor": 0.12,
+        "roughness": 0.22
+      },
+      "iridescence": {
+        "factor": 0,
+        "ior": 1.3,
+        "thicknessMinimum": 250,
+        "thicknessMaximum": 450
+      },
+      "normalScale": 0.85,
+      "ao": true
+    },
+    "BlackPolymer": {
+      "baseColorSrgb": "#1B1B1B",
+      "baseColorFactor": [
+        0.010960094,
+        0.010960094,
+        0.010960094,
+        1
+      ],
+      "metalness": 0,
+      "roughness": 0.76,
+      "clearcoat": {
+        "factor": 0,
+        "roughness": 0.08
+      },
+      "iridescence": {
+        "factor": 0,
+        "ior": 1.3,
+        "thicknessMinimum": 250,
+        "thicknessMaximum": 450
+      },
+      "normalScale": 0.85,
+      "ao": true,
+      "roughnessTexture": "assets/textures/polymer_roughness.png",
+      "normalTexture": "assets/textures/polymer_normal.png"
+    },
+    "GripPolymer": {
+      "baseColorSrgb": "#1B1B1B",
+      "baseColorFactor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "metalness": 0,
+      "roughness": 0.76,
+      "clearcoat": {
+        "factor": 0,
+        "roughness": 0.08
+      },
+      "iridescence": {
+        "factor": 0,
+        "ior": 1.3,
+        "thicknessMinimum": 250,
+        "thicknessMaximum": 450
+      },
+      "normalScale": 0.85,
+      "ao": true,
+      "baseColorTexture": "assets/textures/grip.png",
+      "roughnessTexture": "assets/textures/polymer_roughness.png",
+      "normalTexture": "assets/textures/polymer_normal.png"
+    },
+    "StockPolymer": {
+      "baseColorSrgb": "#1B1B1B",
+      "baseColorFactor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "metalness": 0,
+      "roughness": 0.76,
+      "clearcoat": {
+        "factor": 0,
+        "roughness": 0.08
+      },
+      "iridescence": {
+        "factor": 0,
+        "ior": 1.3,
+        "thicknessMinimum": 250,
+        "thicknessMaximum": 450
+      },
+      "normalScale": 0.85,
+      "ao": true,
+      "baseColorTexture": "assets/textures/stock.png",
+      "roughnessTexture": "assets/textures/polymer_roughness.png",
+      "normalTexture": "assets/textures/polymer_normal.png"
+    },
+    "Rubber": {
+      "baseColorSrgb": "#0D0E0F",
+      "baseColorFactor": [
+        0.004024717,
+        0.004391442,
+        0.004776953,
+        1
+      ],
+      "metalness": 0,
+      "roughness": 0.86,
+      "clearcoat": {
+        "factor": 0,
+        "roughness": 0.08
+      },
+      "iridescence": {
+        "factor": 0,
+        "ior": 1.3,
+        "thicknessMinimum": 250,
+        "thicknessMaximum": 450
+      },
+      "normalScale": 0.5,
+      "ao": true,
+      "normalTexture": "assets/textures/polymer_normal.png"
+    },
+    "Holographic": {
+      "baseColorSrgb": "#D3DDE3",
+      "baseColorFactor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "metalness": 0.18,
+      "roughness": 0.23,
+      "clearcoat": {
+        "factor": 1,
+        "roughness": 0.055
+      },
+      "iridescence": {
+        "factor": 1,
+        "ior": 1.3,
+        "thicknessMinimum": 250,
+        "thicknessMaximum": 450,
+        "thicknessTexture": "assets/textures/holo_film.png"
+      },
+      "normalScale": 0.85,
+      "ao": true,
+      "baseColorTexture": "assets/textures/holo.png"
+    },
+    "Brass": {
+      "baseColorSrgb": "#B49657",
+      "baseColorFactor": [
+        0.456411023,
+        0.304987314,
+        0.095307467,
+        1
+      ],
+      "metalness": 0.82,
+      "roughness": 0.31,
+      "clearcoat": {
+        "factor": 0.1,
+        "roughness": 0.2
+      },
+      "iridescence": {
+        "factor": 0,
+        "ior": 1.3,
+        "thicknessMinimum": 250,
+        "thicknessMaximum": 450
+      },
+      "normalScale": 0.85,
+      "ao": true
+    },
+    "Copper": {
+      "baseColorSrgb": "#9C6644",
+      "baseColorFactor": [
+        0.332451536,
+        0.132868322,
+        0.05780543,
+        1
+      ],
+      "metalness": 0.88,
+      "roughness": 0.3,
+      "clearcoat": {
+        "factor": 0.08,
+        "roughness": 0.2
+      },
+      "iridescence": {
+        "factor": 0,
+        "ior": 1.3,
+        "thicknessMinimum": 250,
+        "thicknessMaximum": 450
+      },
+      "normalScale": 0.85,
+      "ao": true
+    }
+  }
+}
